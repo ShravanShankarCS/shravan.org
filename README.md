@@ -1,2 +1,2 @@
-# shyam.io
-the static site of shyam.io
+# shravan.org
+the static site of shravan.org
