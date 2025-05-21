@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShravScript - A Custom Programming Language</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">ShravScript</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                    <li><a href="download.html">Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>ShravScript</h1>
+            <h2>A custom programming language that combines the best of Python and JavaScript</h2>
+            <div class="cta-buttons">
+                <a href="download.html" class="btn primary">Download</a>
+                <a href="documentation.html" class="btn secondary">Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Python/JavaScript Inspired</h3>
+                    <p>Combines the best features and syntax from both languages.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Built-in Libraries</h3>
+                    <p>Networking, file I/O, math functions, and system operations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Clear Syntax</h3>
+                    <p>Uses curly braces for blocks, making code structure clear.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Interactive REPL</h3>
+                    <p>Try code interactively with the built-in REPL.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-example">
+        <div class="container">
+            <h2>Code Example</h2>
+            <pre><code class="language-javascript">
+# Fibonacci function in ShravScript
+fn fib(n) {
+    if n <= 1 {
+        return n
+    } elif n == 2 {
+        return 1
+    } else {
+        return fib(n - 1) + fib(n - 2)
+    }
+}
+
+print(fib(8))  # Output: 21
+            </code></pre>
+        </div>
+    </section>
+
+    <section class="get-started">
+        <div class="container">
+            <h2>Getting Started</h2>
+            <ol>
+                <li>
+                    <h3>Install Python 3.6+</h3>
+                    <p>ShravScript is implemented in Python and requires Python 3.6 or higher.</p>
+                </li>
+                <li>
+                    <h3>Download ShravScript</h3>
+                    <p>Clone the repository or download the latest release from the <a href="download.html">download page</a>.</p>
+                </li>
+                <li>
+                    <h3>Install Dependencies</h3>
+                    <p>Run <code>pip install requests</code> to install required dependencies.</p>
+                </li>
+                <li>
+                    <h3>Run Your First Program</h3>
+                    <p>Create a <code>.shs</code> file and run it with <code>python main.py your_program.shs</code>.</p>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ShravScript by <a href="https://shravan.org" target="_blank">Shravan Shankar C S</a>. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://github.com/ShravanShankarCS/ShravScript" target="_blank">GitHub</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="examples.html">Examples</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

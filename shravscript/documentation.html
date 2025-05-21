@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - ShravScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">ShravScript</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="documentation.html" class="active">Documentation</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                    <li><a href="download.html">Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="docs-container">
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <h3>Documentation</h3>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#syntax">Syntax</a></li>
+                    <li><a href="#types">Data Types</a></li>
+                    <li><a href="#control-flow">Control Flow</a></li>
+                    <li><a href="#functions">Functions</a></li>
+                    <li><a href="#modules">Modules & Libraries</a></li>
+                    <li><a href="#repl">Using the REPL</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="docs-content">
+            <section id="introduction">
+                <h2>Introduction to ShravScript</h2>
+                <p>ShravScript is a custom programming language implemented in Python that combines the best features of Python and JavaScript. It uses curly braces for blocks (like JavaScript) while maintaining a clean and readable syntax inspired by Python.</p>
+                <p>Key features include:</p>
+                <ul>
+                    <li>Clean and consistent syntax</li>
+                    <li>First-class functions and lambdas</li>
+                    <li>Built-in modules for common tasks</li>
+                    <li>Interactive REPL for experimenting</li>
+                </ul>
+            </section>
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <p>To install ShravScript, follow these steps:</p>
+                <ol>
+                    <li>Ensure you have Python 3.6+ installed on your system</li>
+                    <li>Clone the ShravScript repository from GitHub or download the zip file from the <a href="download.html">download page</a></li>
+                    <li>Install the required dependencies:
+                        <pre><code class="language-bash">pip install requests</code></pre>
+                    </li>
+                </ol>
+                <p>To test your installation, try running an example:</p>
+                <pre><code class="language-bash">python main.py examples/hello_world.shs</code></pre>
+            </section>
+
+            <section id="syntax">
+                <h2>Basic Syntax</h2>
+                <p>ShravScript uses curly braces to define blocks of code:</p>
+                <pre><code class="language-javascript">
+# This is a comment
+let name = "World"
+if name == "World" {
+    print("Hello, World!")
+} else {
+    print("Hello, " + name)
+}
+                </code></pre>
+
+                <h3>Variables</h3>
+                <p>Variables are declared using the <code>let</code> keyword:</p>
+                <pre><code class="language-javascript">
+let age = 25
+let name = "John"
+let is_active = true
+                </code></pre>
+
+                <h3>Operators</h3>
+                <p>ShravScript supports the standard arithmetic, comparison, and logical operators:</p>
+                <pre><code class="language-javascript">
+# Arithmetic
+let sum = 5 + 3
+let difference = 10 - 4
+let product = 6 * 7
+let quotient = 15 / 3
+let exponent = 2 ** 3  # 8
+
+# Comparison
+let is_equal = x == y
+let is_not_equal = x != y
+let is_greater = x > y
+let is_less_or_equal = x <= y
+
+# Logical
+let both_true = condition1 and condition2
+let either_true = condition1 or condition2
+let is_not_true = not condition
+                </code></pre>
+            </section>
+
+            <section id="types">
+                <h2>Data Types</h2>
+                <p>ShravScript supports several built-in data types:</p>
+
+                <h3>Primitive Types</h3>
+                <ul>
+                    <li>Number (both integers and floating-point)</li>
+                    <li>String</li>
+                    <li>Boolean</li>
+                    <li>Null</li>
+                </ul>
+
+                <h3>Collections</h3>
+                <pre><code class="language-javascript">
+# Lists
+let numbers = [1, 2, 3, 4, 5]
+let first_number = numbers[0]
+
+# Dictionaries
+let person = {
+    name: "Alice",
+    age: 30,
+    city: "New York"
+}
+let person_name = person.name
+                </code></pre>
+            </section>
+
+            <section id="control-flow">
+                <h2>Control Flow</h2>
+                
+                <h3>Conditionals</h3>
+                <pre><code class="language-javascript">
+if x > 10 {
+    print("x is greater than 10")
+} elif x > 5 {
+    print("x is greater than 5 but not greater than 10")
+} else {
+    print("x is 5 or less")
+}
+                </code></pre>
+
+                <h3>Loops</h3>
+                <pre><code class="language-javascript">
+# While loop
+let i = 0
+while i < 5 {
+    print(i)
+    i = i + 1
+}
+
+# For loop
+for j in 0..5 {
+    print(j)
+}
+                </code></pre>
+            </section>
+
+            <section id="functions">
+                <h2>Functions</h2>
+                <p>Functions are defined using the <code>fn</code> keyword:</p>
+                <pre><code class="language-javascript">
+fn greet(name) {
+    return "Hello, " + name
+}
+
+print(greet("Alice"))  # Outputs: Hello, Alice
+                </code></pre>
+
+                <h3>Returning Values</h3>
+                <p>Functions can return values using the <code>return</code> statement:</p>
+                <pre><code class="language-javascript">
+fn add(a, b) {
+    return a + b
+}
+
+let sum = add(5, 3)  # 8
+                </code></pre>
+            </section>
+
+            <section id="modules">
+                <h2>Modules & Libraries</h2>
+                <p>ShravScript includes several built-in modules:</p>
+
+                <h3>fileio</h3>
+                <p>For file operations:</p>
+                <pre><code class="language-javascript">
+import "fileio"
+
+# Write to a file
+fileio.write("output.txt", "Hello, World!")
+
+# Read from a file
+let content = fileio.read("output.txt")
+print(content)
+                </code></pre>
+
+                <h3>netgear</h3>
+                <p>For network operations:</p>
+                <pre><code class="language-javascript">
+import "netgear"
+
+# Make a GET request
+let response = netgear.get("https://example.com")
+print(response)
+                </code></pre>
+
+                <h3>mathex</h3>
+                <p>For mathematical operations:</p>
+                <pre><code class="language-javascript">
+import "mathex"
+
+let root = mathex.sqrt(16)    # 4
+let power = mathex.pow(2, 3)  # 8
+let random = mathex.random()  # Random value between 0 and 1
+                </code></pre>
+
+                <h3>sysops</h3>
+                <p>For system operations:</p>
+                <pre><code class="language-javascript">
+import "sysops"
+
+let files = sysops.listdir(".")
+print(files)
+
+let home_dir = sysops.getenv("HOME")
+print(home_dir)
+                </code></pre>
+            </section>
+
+            <section id="repl">
+                <h2>Using the REPL</h2>
+                <p>ShravScript includes an interactive REPL (Read-Eval-Print Loop) that allows you to experiment with the language:</p>
+                <pre><code class="language-bash">python main.py --repl</code></pre>
+                <p>In the REPL, you can enter ShravScript code and see the results immediately:</p>
+                <pre><code class="language-bash">
+shs> let x = 10
+shs> let y = 20
+shs> x + y
+30
+shs> exit()
+                </code></pre>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ShravScript by <a href="https://shravan.org" target="_blank">Shravan Shankar C S</a>. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://github.com/ShravanShankarCS/ShravScript" target="_blank">GitHub</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="examples.html">Examples</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

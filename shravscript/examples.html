@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples - ShravScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">ShravScript</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="documentation.html">Documentation</a></li>
+                    <li><a href="examples.html" class="active">Examples</a></li>
+                    <li><a href="download.html">Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Examples</h1>
+            <p>Explore these examples to see ShravScript in action.</p>
+        </div>
+    </section>
+
+    <section class="examples-container">
+        <div class="container">
+            <div class="example-card">
+                <h2>Hello World</h2>
+                <p>The classic first program for any language.</p>
+                <pre><code class="language-javascript">
+print("Welcome to ShravScript!")
+                </code></pre>
+                <p class="example-details">File: <code>examples/hello_world.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>Fibonacci Sequence</h2>
+                <p>A recursive implementation of the Fibonacci sequence.</p>
+                <pre><code class="language-javascript">
+fn fib(n) {
+    if n <= 1 {
+        return n
+    } elif n == 2 {
+        return 1
+    } else {
+        return fib(n - 1) + fib(n - 2)
+    }
+}
+print(fib(8))  # Output: 21
+                </code></pre>
+                <p class="example-details">File: <code>examples/fibonacci.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>List Operations</h2>
+                <p>Working with lists and loops.</p>
+                <pre><code class="language-javascript">
+let numbers = [1, 2, 3, 4]
+let i = 0
+while i < 4 {
+    if numbers[i] == 3 {
+        i = i + 1
+        continue
+    }
+    if numbers[i] > 3 {
+        break
+    }
+    print(numbers[i])
+    i = i + 1
+}
+                </code></pre>
+                <p class="example-details">File: <code>examples/list_iteration.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>File I/O</h2>
+                <p>Reading and writing files.</p>
+                <pre><code class="language-javascript">
+import "fileio"
+fileio.write("output.txt", "This is ShravScript writing to a file!")
+let content = fileio.read("output.txt")
+print(content)
+                </code></pre>
+                <p class="example-details">File: <code>examples/file_writing.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>Network Request</h2>
+                <p>Making HTTP requests.</p>
+                <pre><code class="language-javascript">
+import "netgear"
+try {
+    let response = netgear.get("https://example.com")
+    print(response)
+} catch (err) {
+    print("Network error: " + err)
+}
+                </code></pre>
+                <p class="example-details">File: <code>examples/network_call.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>System Operations</h2>
+                <p>Interacting with the operating system.</p>
+                <pre><code class="language-javascript">
+import "sysops"
+print(sysops.listdir("."))
+print(sysops.getenv("HOME"))
+                </code></pre>
+                <p class="example-details">File: <code>examples/system_info.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>Working with Collections</h2>
+                <p>Map-like operations on lists.</p>
+                <pre><code class="language-javascript">
+let nums = [1, 2, 3]
+print("Original numbers:")
+print(nums)
+
+print("Doubled values:")
+print(nums[0] * 2)
+print(nums[1] * 2)
+print(nums[2] * 2)
+                </code></pre>
+                <p class="example-details">File: <code>examples/lambda_map.shs</code></p>
+            </div>
+
+            <div class="example-card">
+                <h2>ASCII Art</h2>
+                <p>Creating and saving ASCII art.</p>
+                <pre><code class="language-javascript">
+import "fileio"
+
+let art = "   _____  _                           _____           _       _   
+  / ____|| |                         / ____|         (_)     | |  
+ | (___ | |__  _ __ __ ___   __     | (___   ___ _ __ _ _ __ | |_ 
+  \\___ \\| '_ \\| '__/ _` \\ \\ / /      \\___ \\ / __| '__| | '_ \\| __|
+  ____) | | | | | | (_| |\\ V /       ____) | (__| |  | | |_) | |_ 
+ |_____/|_| |_|_|  \\__,_| \\_/       |_____/ \\___|_|  |_| .__/ \\__|
+                                                       | |        
+                                                       |_|        "
+
+print(art)
+fileio.write("ascii_art.txt", art)
+print("ASCII art saved to ascii_art.txt")
+                </code></pre>
+                <p class="example-details">File: <code>examples/ascii.shs</code></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="try-yourself">
+        <div class="container">
+            <h2>Try It Yourself</h2>
+            <p>Download ShravScript and run these examples on your machine:</p>
+            <pre><code class="language-bash">python main.py examples/hello_world.shs</code></pre>
+            <a href="download.html" class="btn primary">Download ShravScript</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ShravScript by <a href="https://shravan.org" target="_blank">Shravan Shankar C S</a>. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://github.com/ShravanShankarCS/ShravScript" target="_blank">GitHub</a>
+                <a href="documentation.html">Documentation</a>
+                <a href="examples.html">Examples</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
