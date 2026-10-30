@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found - Shravan S C S</title>
+  <meta name="description" content="This page does not exist.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f0efea">
+  <link rel="icon" href="./assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./assets/images/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png">
+  <link rel="preload" href="./assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./assets/css/style.css?v=2">
+  <script>
+    (function () {
+      document.documentElement.classList.add('js');
+      try {
+        var stored = localStorage.getItem('theme');
+        if (stored === 'light' || stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', stored);
+        }
+      } catch (e) { /* storage can be blocked */ }
+    })();
+  </script>
+</head>
+
+<body>
+  <header class="site-header is-scrolled">
+    <div class="shell header-inner">
+      <a class="wordmark" href="./" aria-label="Shravan S C S, Berlin, back to home">
+        Shravan S C S
+        <span class="wordmark-loc">Berlin</span>
+      </a>
+      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="error-page" aria-labelledby="error-title">
+      <div class="shell">
+        <p class="error-code" aria-hidden="true">404</p>
+        <div class="error-copy">
+          <h1 id="error-title">This page does not exist.</h1>
+          <p>The address may be wrong, or the page may have moved.</p>
+          <a class="btn" href="./">Back to the homepage</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <p>&copy; <span data-year>2026</span> Shravan S C S</p>
+      <p>Berlin, Germany</p>
+    </div>
+  </footer>
+
+  <script src="./assets/js/script.js?v=1"></script>
+</body>
+
+</html>

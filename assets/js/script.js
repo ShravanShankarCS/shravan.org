@@ -1,159 +1,255 @@
 'use strict';
 
+window.__shravanReady = true;
+document.documentElement.classList.add('js-menu');
 
+/*-----------------------------------*\
+  Theme
+\*-----------------------------------*/
 
-// element toggle function
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
+const root = document.documentElement;
+const themeButtons = document.querySelectorAll('[data-theme-toggle]');
+const themeLabel = document.querySelector('[data-theme-label]');
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
+const themeColors = {
+  light: '#f0efea',
+  dark: '#121311'
+};
 
+const currentTheme = function () {
+  const forced = root.getAttribute('data-theme');
+  if (forced === 'light' || forced === 'dark') return forced;
+  return systemTheme.matches ? 'dark' : 'light';
+};
 
-// sidebar variables
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+const paintThemeState = function (theme) {
+  const next = theme === 'dark' ? 'light' : 'dark';
 
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
-
-
-
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
+  themeButtons.forEach(function (button) {
+    button.setAttribute('aria-label', 'Switch to ' + next + ' theme');
   });
 
-}
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
-
-
-
-// custom select variables
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-select.addEventListener("click", function () { elementToggleFunc(this); });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-    } else {
-      filterItems[i].classList.remove("active");
-    }
-
+  if (themeLabel) {
+    themeLabel.textContent = 'Switch to ' + next + ' theme';
   }
 
-}
+  if (themeMeta) {
+    themeMeta.setAttribute('content', themeColors[theme]);
+  }
+};
 
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
+const applyTheme = function (theme, persist) {
+  root.setAttribute('data-theme', theme);
 
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
-
-  });
-
-}
-
-
-
-// contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
+  if (persist) {
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (error) {
+      /* storage can be blocked */
     }
+  }
 
+  paintThemeState(theme);
+};
+
+themeButtons.forEach(function (button) {
+  button.addEventListener('click', function () {
+    applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
+  });
+});
+
+systemTheme.addEventListener('change', function () {
+  if (!root.hasAttribute('data-theme')) {
+    paintThemeState(currentTheme());
+  }
+});
+
+paintThemeState(currentTheme());
+
+/*-----------------------------------*\
+  Header state
+\*-----------------------------------*/
+
+const header = document.querySelector('[data-header]');
+const headerSentinel = document.querySelector('[data-header-sentinel]');
+
+if (header && headerSentinel) {
+  const headerObserver = new IntersectionObserver(function (entries) {
+    const isScrolled = !entries[0].isIntersecting;
+    header.classList.toggle('is-scrolled', isScrolled);
+
+    if (!isScrolled) {
+      document.querySelectorAll('[data-nav]').forEach(function (link) {
+        link.removeAttribute('aria-current');
+      });
+    }
+  });
+
+  headerObserver.observe(headerSentinel);
+}
+
+/*-----------------------------------*\
+  Mobile menu
+\*-----------------------------------*/
+
+const menu = document.querySelector('[data-menu]');
+const menuOpen = document.querySelector('[data-menu-open]');
+const menuClose = document.querySelector('[data-menu-close]');
+const menuLinks = document.querySelectorAll('[data-menu-link]');
+
+if (menu && menuOpen) {
+  menuOpen.addEventListener('click', function () {
+    menu.showModal();
+    document.body.style.overflow = 'hidden';
+  });
+
+  const closeMenu = function () {
+    if (menu.open) menu.close();
+  };
+
+  menuClose.addEventListener('click', closeMenu);
+
+  menuLinks.forEach(function (link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  menu.addEventListener('close', function () {
+    document.body.style.overflow = '';
+    menuOpen.focus();
+  });
+
+  window.matchMedia('(min-width: 820px)').addEventListener('change', function (event) {
+    if (event.matches) closeMenu();
   });
 }
 
+/*-----------------------------------*\
+  Scroll reveal
+\*-----------------------------------*/
 
+const revealItems = document.querySelectorAll('[data-reveal]');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-// page navigation variables
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+if (revealItems.length && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        revealObserver.unobserve(entry.target);
       }
-    }
-
+    });
+  }, {
+    rootMargin: '0px 0px -8% 0px',
+    threshold: 0.08
   });
+
+  revealItems.forEach(function (item) {
+    if (reduceMotion.matches) {
+      item.classList.add('is-in');
+    } else {
+      revealObserver.observe(item);
+    }
+  });
+} else {
+  revealItems.forEach(function (item) {
+    item.classList.add('is-in');
+  });
+}
+
+/*-----------------------------------*\
+  Active navigation
+\*-----------------------------------*/
+
+const navLinks = document.querySelectorAll('[data-nav]');
+const sections = document.querySelectorAll('main section[id]');
+
+if (navLinks.length && sections.length && 'IntersectionObserver' in window) {
+  const sectionObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+
+      navLinks.forEach(function (link) {
+        const isCurrent = link.getAttribute('href') === '#' + entry.target.id;
+        if (isCurrent) {
+          link.setAttribute('aria-current', 'true');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    });
+  }, {
+    rootMargin: '-18% 0px -68% 0px'
+  });
+
+  sections.forEach(function (section) {
+    sectionObserver.observe(section);
+  });
+}
+
+/*-----------------------------------*\
+  Copy email
+\*-----------------------------------*/
+
+const copyButton = document.querySelector('[data-copy]');
+const copyStatus = document.querySelector('[data-copy-status]');
+
+const fallbackCopy = function (text) {
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.position = 'fixed';
+  field.style.opacity = '0';
+  document.body.appendChild(field);
+  field.select();
+
+  try {
+    document.execCommand('copy');
+  } catch (error) {
+    /* nothing else to try */
+  }
+
+  document.body.removeChild(field);
+};
+
+if (copyButton) {
+  copyButton.addEventListener('click', async function () {
+    const text = copyButton.getAttribute('data-copy');
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (error) {
+          fallbackCopy(text);
+        }
+      } else {
+        fallbackCopy(text);
+      }
+
+      copyButton.textContent = 'Copied';
+      copyButton.classList.add('is-copied');
+
+      if (copyStatus) copyStatus.textContent = 'Email address copied';
+
+      window.setTimeout(function () {
+        copyButton.textContent = 'Copy';
+        copyButton.classList.remove('is-copied');
+        if (copyStatus) copyStatus.textContent = '';
+      }, 2000);
+    } catch (error) {
+      if (copyStatus) copyStatus.textContent = 'Could not copy. The address is contact@shravan.org';
+    }
+  });
+}
+
+/*-----------------------------------*\
+  Year
+\*-----------------------------------*/
+
+const year = document.querySelector('[data-year]');
+
+if (year) {
+  year.textContent = String(new Date().getFullYear());
 }
