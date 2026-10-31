@@ -611,6 +611,9 @@ function renderGallery(data) {
   artworkList = data.artworks;
   gallery.innerHTML = '';
 
+  const rest = document.createElement('div');
+  rest.className = 'gallery-rest';
+
   data.artworks.forEach((artwork, index) => {
     const figure = document.createElement('figure');
     figure.className = 'gallery-item';
@@ -668,8 +671,12 @@ function renderGallery(data) {
     link.append(image, open);
     caption.append(title, medium);
     figure.append(link, caption);
-    gallery.appendChild(figure);
+
+    if (index === 0) gallery.appendChild(figure);
+    else rest.appendChild(figure);
   });
+
+  if (rest.children.length) gallery.appendChild(rest);
 }
 
 function updateWorksCounts(data) {
