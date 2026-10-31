@@ -1536,6 +1536,20 @@ body::after {
   transform: scale(1.012);
 }
 
+.gallery-item:first-child .plate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-item:first-child .plate img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(78vh, 980px);
+  object-fit: contain;
+}
+
 .plate-open {
   position: absolute;
   right: 14px;
@@ -2101,6 +2115,15 @@ body::after {
   white-space: nowrap;
   text-overflow: ellipsis;
   transition: color var(--dur-fast) ease;
+}
+
+.works-preview-year {
+  display: block;
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
 }
 
 .works-preview-item:hover .works-preview-title {

@@ -44,6 +44,8 @@ jobs:
         run: npm run build:works
       - name: Check translations
         run: npm run check:i18n
+      - name: Remove build dependencies
+        run: rm -rf node_modules
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

@@ -543,8 +543,13 @@ function renderWorksPreview(data) {
     title.className = 'works-preview-title';
     title.textContent = artwork.title;
 
+    const year = document.createElement('span');
+    year.className = 'works-preview-year';
+    year.textContent = artwork.year || '';
+
     media.appendChild(image);
     link.append(media, title);
+    if (artwork.year) link.appendChild(year);
     worksPreview.appendChild(link);
   });
 }
@@ -564,10 +569,14 @@ function renderLightbox(index) {
 
   if (lightboxTitle) lightboxTitle.textContent = artwork.title;
   if (lightboxMedium) {
-    lightboxMedium.textContent =
+    const mediumText =
       artwork.medium === 'Ink on paper'
         ? t('works.ink', 'Ink on paper')
         : artwork.medium;
+
+    lightboxMedium.textContent = artwork.year
+      ? `${mediumText}, ${artwork.year}`
+      : mediumText;
   }
   if (lightboxCount) {
     lightboxCount.textContent = `${index + 1} / ${artworkList.length}`;
@@ -645,10 +654,15 @@ function renderGallery(data) {
     medium.className = 'artwork-medium';
 
     if (artwork.medium === 'Ink on paper') {
-      medium.setAttribute('data-i18n', 'works.ink');
-      medium.textContent = t('works.ink', 'Ink on paper');
+      const label = document.createElement('span');
+      label.setAttribute('data-i18n', 'works.ink');
+      label.textContent = t('works.ink', 'Ink on paper');
+      medium.appendChild(label);
+      if (artwork.year) medium.append(`, ${artwork.year}`);
     } else {
-      medium.textContent = artwork.medium;
+      medium.textContent = artwork.year
+        ? `${artwork.medium}, ${artwork.year}`
+        : artwork.medium;
     }
 
     link.append(image, open);

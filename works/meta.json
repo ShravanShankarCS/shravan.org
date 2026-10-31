@@ -1,24 +1,34 @@
 {
   "artworks": {
+    "karstheultimatebeingjjba": {
+      "title": "Kars, the Ultimate Being",
+      "medium": "Ink on paper",
+      "year": 2026,
+      "order": 0
+    },
     "alecguinessobiwankenobi": {
       "title": "Alec Guinness as Obi-Wan Kenobi",
-      "medium": "Ink on paper"
-    },
-    "karstheultimatebeingjjba": {
-      "title": "Karl, the Ultimate Being",
-      "medium": "Ink on paper"
+      "medium": "Ink on paper",
+      "year": 2025,
+      "order": 1
     },
     "lukeskywalker": {
       "title": "Luke Skywalker",
-      "medium": "Ink on paper"
+      "medium": "Ink on paper",
+      "year": 2025,
+      "order": 2
     },
     "palpatine": {
       "title": "Palpatine",
-      "medium": "Ink on paper"
+      "medium": "Ink on paper",
+      "year": 2025,
+      "order": 3
     },
     "squidgameseonggihun": {
       "title": "Seong Gi-hun, Squid Game",
-      "medium": "Ink on paper"
+      "medium": "Ink on paper",
+      "year": 2025,
+      "order": 4
     }
   }
 }
