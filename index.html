@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-skin="paper">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' 'unsafe-inline' file:; style-src 'self' 'unsafe-inline' file:; img-src 'self' data: file:; font-src 'self' file:; media-src 'self' file:; connect-src 'self' file:; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="no-referrer">
 
-  <title>Shravan S C S - AI and software student in Berlin</title>
-  <meta name="description" content="Shravan S C S is a student in Berlin working on AI systems, computer vision, and embedded hardware. Selected projects, experience, and contact.">
+  <title>Shravan S C S - AI, software, and embedded systems</title>
+  <meta name="description" content="Shravan S C S works on AI systems, computer vision, and embedded hardware. Projects and work history in Berlin.">
   <meta name="author" content="Shravan S C S">
   <meta name="theme-color" content="#f0efea">
   <link rel="canonical" href="https://shravan.org/">
@@ -14,8 +16,8 @@
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Shravan S C S">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Shravan S C S - AI and software student in Berlin">
-  <meta property="og:description" content="AI systems, computer vision, and embedded hardware. Student at Internationale Schule Berlin.">
+  <meta property="og:title" content="Shravan S C S - AI, software, and embedded systems">
+  <meta property="og:description" content="AI systems, computer vision, and embedded hardware. Projects and work history.">
   <meta property="og:url" content="https://shravan.org/">
   <meta property="og:image" content="https://shravan.org/assets/images/og-card.png">
   <meta property="og:image:type" content="image/png">
@@ -23,8 +25,8 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Shravan S C S, AI systems, computer vision, and embedded hardware">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Shravan S C S - AI and software student in Berlin">
-  <meta name="twitter:description" content="AI systems, computer vision, and embedded hardware. Student at Internationale Schule Berlin.">
+  <meta name="twitter:title" content="Shravan S C S - AI, software, and embedded systems">
+  <meta name="twitter:description" content="AI systems, computer vision, and embedded hardware. Projects and work history.">
   <meta name="twitter:image" content="https://shravan.org/assets/images/og-card.png">
   <meta name="twitter:image:alt" content="Shravan S C S, AI systems, computer vision, and embedded hardware">
 
@@ -34,7 +36,9 @@
 
   <link rel="preload" href="./assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./assets/css/style.css?v=2">
+  <link rel="preload" href="./assets/fonts/bodoni-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./assets/css/style.css?v=14">
 
   <script type="application/ld+json">
     {
@@ -44,28 +48,16 @@
       "url": "https://shravan.org/",
       "email": "contact@shravan.org",
       "image": "https://shravan.org/assets/images/og-card.png",
-      "jobTitle": "Student",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Berlin",
         "addressCountry": "DE"
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "Internationale Schule Berlin"
       },
       "knowsAbout": [
         "Artificial intelligence",
         "Computer vision",
         "Embedded systems",
         "Software development"
-      ],
-      "knowsLanguage": [
-        "Tamil",
-        "Malayalam",
-        "English",
-        "German",
-        "Spanish"
       ],
       "sameAs": [
         "https://github.com/ShravanShankarCS",
@@ -75,17 +67,33 @@
   </script>
 
   <script>
-    // Resolve the theme before first paint so there is no flash.
     (function () {
       document.documentElement.classList.add('js');
+
+      // No cookies. Preferences are kept in localStorage only.
+      var skins = ['paper', 'noir', 'gallery', 'signal'];
+      var skin = null;
+
       try {
-        var stored = localStorage.getItem('theme');
-        if (stored === 'light' || stored === 'dark') {
-          document.documentElement.setAttribute('data-theme', stored);
-        }
+        skin = localStorage.getItem('display-skin');
+        localStorage.removeItem('skin');
+        localStorage.removeItem('season');
+        localStorage.removeItem('effects');
       } catch (e) { /* storage can be blocked */ }
 
-      // If the main script never arrives, do not leave content hidden.
+      if (skins.indexOf(skin) === -1) skin = 'paper';
+
+      document.documentElement.setAttribute('data-skin', skin);
+
+      try {
+        var theme = localStorage.getItem('theme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', theme);
+        }
+        var lang = localStorage.getItem('lang');
+        if (lang === 'de') document.documentElement.lang = 'de';
+      } catch (e) { /* storage can be blocked */ }
+
       window.setTimeout(function () {
         if (!window.__shravanReady) {
           document.documentElement.classList.remove('js');
@@ -95,8 +103,8 @@
   </script>
 </head>
 
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
+<body data-page="home">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
   <div class="header-sentinel" data-header-sentinel aria-hidden="true"></div>
 
   <header class="site-header" data-header>
@@ -108,41 +116,41 @@
 
       <nav class="nav" aria-label="Primary">
         <ul class="nav-list">
-          <li><a href="#work" data-nav>Work</a></li>
-          <li><a href="#about" data-nav>About</a></li>
-          <li><a href="#experience" data-nav>Experience</a></li>
-          <li><a href="#contact" data-nav>Contact</a></li>
+          <li><a href="#work" data-nav data-i18n="nav.projects">Projects</a></li>
+          <li><a href="works.html" data-i18n="nav.works">Works</a></li>
+          <li><a href="#experience" data-nav data-i18n="nav.experience">Experience</a></li>
+          <li><a href="#contact" data-nav data-i18n="nav.contact">Contact</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
-        <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark theme">
+        <button class="theme-btn settings-btn" type="button" data-settings-open aria-label="Display settings" data-i18n-aria-label="nav.settings">
           <span aria-hidden="true">◐</span>
         </button>
-        <a class="btn btn-small" href="mailto:contact@shravan.org">Email me</a>
-        <button class="menu-btn" type="button" data-menu-open aria-haspopup="dialog">Menu</button>
+        <a class="btn btn-small" href="mailto:contact@shravan.org" data-i18n="nav.email">Email me</a>
+        <button class="menu-btn" type="button" data-menu-open aria-haspopup="dialog" data-i18n="nav.menu">Menu</button>
       </div>
     </div>
   </header>
 
-  <dialog class="menu-dialog" data-menu aria-label="Site menu">
+  <dialog class="menu-dialog" data-menu aria-label="Menu" data-i18n-aria-label="nav.menu">
     <div class="menu-inner shell">
       <div class="menu-top">
-        <span class="menu-label">Menu</span>
-        <button class="menu-close" type="button" data-menu-close>Close</button>
+        <span class="menu-label" data-i18n="nav.menu">Menu</span>
+        <button class="menu-close" type="button" data-menu-close data-i18n="nav.close">Close</button>
       </div>
       <nav aria-label="Mobile">
         <ul class="menu-list">
-          <li><a href="#work" data-menu-link>Work</a></li>
-          <li><a href="#about" data-menu-link>About</a></li>
-          <li><a href="#experience" data-menu-link>Experience</a></li>
-          <li><a href="#contact" data-menu-link>Contact</a></li>
+          <li><a href="#work" data-menu-link data-i18n="nav.projects">Projects</a></li>
+          <li><a href="works.html" data-menu-link data-i18n="nav.works">Works</a></li>
+          <li><a href="#experience" data-menu-link data-i18n="nav.experience">Experience</a></li>
+          <li><a href="#contact" data-menu-link data-i18n="nav.contact">Contact</a></li>
         </ul>
       </nav>
       <div class="menu-foot">
-        <button class="theme-btn theme-btn-wide" type="button" data-theme-toggle aria-label="Switch theme">
+        <button class="theme-btn theme-btn-wide" type="button" data-settings-open aria-label="Display settings" data-i18n-aria-label="nav.settings">
           <span aria-hidden="true">◐</span>
-          <span data-theme-label>Switch theme</span>
+          <span data-i18n="settings.title">Display</span>
         </button>
         <a href="mailto:contact@shravan.org" data-menu-link>contact@shravan.org</a>
       </div>
@@ -154,17 +162,16 @@
       <div class="shell hero-grid">
         <div class="hero-copy">
           <p class="hero-meta">
-            <span>Berlin, Germany</span>
-            <span>11th grade</span>
-            <span>Graduating 2028</span>
+            <span data-i18n="hero.location">Berlin, Germany</span>
+            <span data-i18n="hero.focus">AI, software, and hardware</span>
           </p>
 
           <h1 class="hero-name" id="hero-title">Shravan <span class="hero-name-initials">S C S</span></h1>
 
-          <p class="hero-lede">I work on AI systems, computer vision, and embedded hardware.</p>
+          <p class="hero-lede" data-i18n="hero.lede">I work on AI systems, computer vision, and embedded hardware.</p>
 
           <a class="btn hero-cta" href="#work">
-            See the work
+            <span data-i18n="hero.cta">See the work</span>
             <span class="btn-arrow" aria-hidden="true">↓</span>
           </a>
         </div>
@@ -174,7 +181,7 @@
           <div class="portrait-frame">
             <picture>
               <source srcset="./assets/images/portrait-2026.webp" type="image/webp">
-              <img src="./assets/images/portrait-2026.png" alt="Portrait of Shravan S C S" width="328" height="328" fetchpriority="high">
+              <img src="./assets/images/portrait-2026.png" alt="Portrait of Shravan S C S" width="328" height="328" fetchpriority="high" data-i18n-alt="hero.portraitAlt">
             </picture>
           </div>
         </figure>
@@ -184,7 +191,7 @@
     <section class="section" id="work" aria-labelledby="work-title">
       <div class="shell">
         <div class="section-head" data-reveal>
-          <h2 id="work-title">Selected work</h2>
+          <h2 id="work-title" data-i18n="work.title">Selected work</h2>
         </div>
 
         <div class="work-list">
@@ -192,26 +199,26 @@
             <div class="work-info">
               <p class="work-kicker">
                 <time datetime="2026">2026</time>
-                <span>AI and accessibility</span>
+                <span data-i18n="work.2026.tag">AI and accessibility</span>
               </p>
               <h3>AI-Powered Stuttering Assistant</h3>
-              <p class="work-desc">A support tool for people who stutter, built around an AI workflow. I contributed to the system architecture, the AI workflows, and the technical implementation.</p>
+              <p class="work-desc" data-i18n="work.2026.desc">A support tool for people who stutter, built around an AI workflow. I contributed to the system architecture, the AI workflows, and the technical implementation.</p>
               <dl class="work-facts">
                 <div>
-                  <dt>Role</dt>
-                  <dd>System architecture, AI workflows, implementation</dd>
+                  <dt data-i18n="work.role">Role</dt>
+                  <dd data-i18n="work.2026.role">System architecture, AI workflows, implementation</dd>
                 </div>
                 <div>
-                  <dt>Area</dt>
-                  <dd>AI models, speech, software prototyping</dd>
+                  <dt data-i18n="work.area">Area</dt>
+                  <dd data-i18n="work.2026.area">AI models, speech, software prototyping</dd>
                 </div>
               </dl>
             </div>
 
             <div class="work-plate work-plate-accent" aria-hidden="true">
-              <span class="plate-top">AI / speech</span>
+              <span class="plate-top" data-i18n="work.2026.plateTop">AI / speech</span>
               <span class="plate-year">2026</span>
-              <span class="plate-bottom">Support tool<br>for people who stutter</span>
+              <span class="plate-bottom" data-i18n-html="work.2026.plateBottomHtml">Support tool<br>for people who stutter</span>
             </div>
           </article>
 
@@ -219,146 +226,95 @@
             <div class="work-info">
               <p class="work-kicker">
                 <time datetime="2024">2024</time>
-                <span>Embedded vision</span>
+                <span data-i18n="work.2024.tag">Embedded vision</span>
               </p>
               <h3>ESP32 Facial Detection</h3>
-              <p class="work-desc">A facial detection system built on an ESP32 camera board, using Arduino libraries and OpenCV. Camera integration, embedded constraints, and a Python pipeline.</p>
+              <p class="work-desc" data-i18n="work.2024.desc">A facial detection system built on an ESP32 camera board, using Arduino libraries and OpenCV. Camera integration, embedded constraints, and a Python pipeline.</p>
               <dl class="work-facts">
                 <div>
-                  <dt>Hardware</dt>
-                  <dd>ESP32 camera, Arduino</dd>
+                  <dt data-i18n="work.hardware">Hardware</dt>
+                  <dd data-i18n="work.2024.hardware">ESP32 camera, Arduino</dd>
                 </div>
                 <div>
-                  <dt>Software</dt>
-                  <dd>OpenCV, Python, face detection</dd>
+                  <dt data-i18n="work.software">Software</dt>
+                  <dd data-i18n="work.2024.software">OpenCV, Python, face detection</dd>
                 </div>
               </dl>
               <a class="text-link" href="https://github.com/ShravanShankarCS/esp-facialrecognition" target="_blank" rel="noopener">
-                View the repository
+                <span data-i18n="work.repo">View the repository</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>
 
             <div class="work-plate work-plate-outline" aria-hidden="true">
-              <span class="plate-top">Embedded vision</span>
+              <span class="plate-top" data-i18n="work.2024.plateTop">Embedded vision</span>
               <span class="plate-year">2024</span>
-              <span class="plate-bottom">ESP32<br>camera board</span>
+              <span class="plate-bottom" data-i18n-html="work.2024.plateBottomHtml">ESP32<br>camera board</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="shell about-grid">
-        <div class="about-copy" data-reveal>
-          <div class="section-head">
-            <h2 id="about-title">About</h2>
-          </div>
-
-          <p class="about-lede">I'm a student with a strong interest in artificial intelligence, software engineering, and emerging technology. I build independent projects involving AI systems, computer vision, and embedded hardware, and I like work that combines analytical thinking with practical problem solving.</p>
-
-          <p>I also care about the human side of technology. At KantMUN 2026 I chaired the ECOSOC committee, stepped in as President of the General Assembly, and helped with the conference's technical infrastructure. It sharpened my public speaking and diplomatic communication, and gave me a close look at the planning behind a large event.</p>
-
-          <div class="skills">
-            <h3>What I work with</h3>
-            <dl class="skill-list">
-              <div>
-                <dt>AI and software</dt>
-                <dd>AI-assisted development, software development, prototyping, AI model integration</dd>
-              </div>
-              <div>
-                <dt>Hardware</dt>
-                <dd>Arduino, ESP32, computer vision, hardware experimentation</dd>
-              </div>
-              <div>
-                <dt>Systems</dt>
-                <dd>System architecture, technical implementation</dd>
-              </div>
-            </dl>
-          </div>
+    <section class="section works-preview-section" id="works" aria-labelledby="works-preview-title">
+      <div class="shell">
+        <div class="section-head" data-reveal>
+          <h2 id="works-preview-title" data-i18n="worksPreview.title">Works</h2>
         </div>
 
-        <aside class="about-facts" data-reveal>
-          <h3>Details</h3>
-          <dl class="fact-list">
-            <div>
-              <dt>Based in</dt>
-              <dd>Berlin, Germany</dd>
-            </div>
-            <div>
-              <dt>School</dt>
-              <dd>Internationale Schule Berlin</dd>
-            </div>
-            <div>
-              <dt>Focus</dt>
-              <dd>AI, software, entrepreneurship</dd>
-            </div>
-            <div>
-              <dt>Languages</dt>
-              <dd>
-                Tamil, Malayalam <span class="muted">native</span><br>
-                English, German <span class="muted">B2</span><br>
-                Spanish <span class="muted">A2</span>
-              </dd>
-            </div>
-          </dl>
-        </aside>
+        <div class="works-preview-head" data-reveal>
+          <p class="works-preview-lede" data-i18n="worksPreview.lede">Ink drawings from the archive.</p>
+          <a class="text-link" href="works.html">
+            <span data-i18n="worksPreview.cta">See the exhibition</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="works-preview" data-works-preview></div>
       </div>
     </section>
+
 
     <section class="section" id="experience" aria-labelledby="experience-title">
       <div class="shell">
         <div class="section-head" data-reveal>
-          <h2 id="experience-title">Experience</h2>
+          <h2 id="experience-title" data-i18n="exp.title">Experience</h2>
         </div>
 
         <div class="record">
           <section class="record-row" data-reveal aria-labelledby="record-work">
-            <h3 id="record-work">Work</h3>
+            <h3 id="record-work" data-i18n="exp.work">Work</h3>
             <div class="record-body">
               <div class="entry">
                 <div class="entry-head">
                   <h4>Upday GmbH</h4>
-                  <time class="entry-date" datetime="2025-01">Jan 2025</time>
+                  <time class="entry-date" datetime="2025-01" data-i18n="exp.jan2025">Jan 2025</time>
                 </div>
-                <p class="entry-sub">Intern, Axel Springer Group</p>
-                <p>A professional internship at a digital media and technology company, with exposure to business operations and technology-driven workflows.</p>
+                <p class="entry-sub" data-i18n="exp.updayRole">Intern, Axel Springer Group</p>
+                <p data-i18n="exp.updayDesc">A professional internship at a digital media and technology company, with exposure to business operations and technology-driven workflows.</p>
               </div>
             </div>
           </section>
 
           <section class="record-row" data-reveal aria-labelledby="record-leadership">
-            <h3 id="record-leadership">Leadership</h3>
+            <h3 id="record-leadership" data-i18n="exp.leadership">Leadership</h3>
             <div class="record-body">
               <div class="entry">
                 <div class="entry-head">
                   <h4>KantMUN 2026</h4>
                   <time class="entry-date" datetime="2026">2026</time>
                 </div>
-                <p class="entry-sub">President of the General Assembly, Chairman and IT Director</p>
+                <p class="entry-sub" data-i18n="exp.kantmunRole">President of the General Assembly, Chairman and IT Director</p>
                 <ul class="entry-list">
-                  <li>Chaired the ECOSOC committee at an international Model United Nations conference.</li>
-                  <li>Stepped in as President of the General Assembly.</li>
-                  <li>Helped plan and run the conference's technical infrastructure.</li>
-                  <li>Awarded Best Chairman for committee leadership and moderation.</li>
+                  <li data-i18n="exp.kantmun1">Chaired the ECOSOC committee at an international Model United Nations conference.</li>
+                  <li data-i18n="exp.kantmun2">Stepped in as President of the General Assembly.</li>
+                  <li data-i18n="exp.kantmun3">Helped plan and run the conference's technical infrastructure.</li>
+                  <li data-i18n="exp.kantmun4">Awarded Best Chairman for committee leadership and moderation.</li>
                 </ul>
               </div>
             </div>
           </section>
 
-          <section class="record-row" data-reveal aria-labelledby="record-education">
-            <h3 id="record-education">Education</h3>
-            <div class="record-body">
-              <div class="entry">
-                <div class="entry-head">
-                  <h4>Internationale Schule Berlin</h4>
-                  <span class="entry-date">Class of 2028</span>
-                </div>
-                <p class="entry-sub">11th grade</p>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
     </section>
@@ -366,23 +322,25 @@
     <section class="section contact" id="contact" aria-labelledby="contact-title">
       <div class="shell">
         <div class="section-head" data-reveal>
-          <h2 id="contact-title">Contact</h2>
+          <h2 id="contact-title" data-i18n="contact.title">Contact</h2>
         </div>
 
-        <p class="contact-lede" data-reveal>For internships, collaborations, or questions, email me.</p>
+        <p class="contact-lede" data-reveal data-i18n="contact.lede">For projects, collaborations, or questions, email me.</p>
 
         <div class="contact-line" data-reveal>
           <a class="contact-email" href="mailto:contact@shravan.org">contact@shravan.org</a>
-          <button class="copy-btn" type="button" data-copy="contact@shravan.org">Copy</button>
+          <button class="copy-btn" type="button" data-copy="contact@shravan.org" data-i18n="contact.copy">Copy</button>
           <span class="visually-hidden" role="status" aria-live="polite" data-copy-status></span>
         </div>
 
         <div class="contact-links" data-reveal>
           <a class="text-link" href="https://github.com/ShravanShankarCS" target="_blank" rel="noopener">
-            GitHub <span aria-hidden="true">↗</span>
+            <span data-i18n="contact.github">GitHub</span>
+            <span aria-hidden="true">↗</span>
           </a>
           <a class="text-link" href="https://www.instagram.com/shravan.s.c.s/" target="_blank" rel="noopener">
-            Instagram <span aria-hidden="true">↗</span>
+            <span data-i18n="contact.instagram">Instagram</span>
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
@@ -392,12 +350,65 @@
   <footer class="site-footer">
     <div class="shell footer-inner">
       <p>&copy; <span data-year>2026</span> Shravan S C S</p>
-      <p>Berlin, Germany</p>
-      <p>No template, no trackers</p>
+      <p data-i18n="footer.location">Berlin, Germany</p>
+      <p data-i18n="footer.note">No cookies, no trackers</p>
     </div>
   </footer>
 
-  <script src="./assets/js/script.js?v=1"></script>
+  <dialog class="settings" data-settings aria-labelledby="settings-title">
+    <div class="settings-panel">
+      <div class="settings-head">
+        <h2 id="settings-title" data-i18n="settings.title">Display</h2>
+        <button class="settings-close" type="button" data-settings-close data-i18n="settings.close">Close</button>
+      </div>
+
+      <div class="settings-scroll">
+        <fieldset class="settings-group">
+          <legend data-i18n="settings.theme">Theme</legend>
+          <div class="skin-grid">
+            <button class="skin-card" type="button" data-skin-option="paper">
+              <span class="skin-swatch skin-swatch-paper" aria-hidden="true"></span>
+              <span data-i18n="settings.skin.paper">Paper</span>
+            </button>
+            <button class="skin-card" type="button" data-skin-option="noir">
+              <span class="skin-swatch skin-swatch-noir" aria-hidden="true"></span>
+              <span data-i18n="settings.skin.noir">Noir</span>
+            </button>
+            <button class="skin-card" type="button" data-skin-option="gallery">
+              <span class="skin-swatch skin-swatch-gallery" aria-hidden="true"></span>
+              <span data-i18n="settings.skin.gallery">Gallery</span>
+            </button>
+            <button class="skin-card" type="button" data-skin-option="signal">
+              <span class="skin-swatch skin-swatch-signal" aria-hidden="true"></span>
+              <span data-i18n="settings.skin.signal">Signal</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="settings-group" data-mode-group>
+          <legend data-i18n="settings.mode">Mode</legend>
+          <div class="segmented">
+            <button type="button" data-mode-option="light" data-i18n="settings.mode.light">Light</button>
+            <button type="button" data-mode-option="dark" data-i18n="settings.mode.dark">Dark</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="settings-group">
+          <legend data-i18n="settings.language">Language</legend>
+          <select class="settings-select" data-language-select aria-label="Language" data-i18n-aria-label="settings.language">
+            <option value="en">English</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </fieldset>
+
+
+        <button class="settings-reset" type="button" data-settings-reset data-i18n="settings.reset">Reset display settings</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="./assets/js/site-data.js?v=15"></script>
+  <script src="./assets/js/script.js?v=15"></script>
 </body>
 
 </html>

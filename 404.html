@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-skin="paper">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; script-src 'self' 'unsafe-inline' file:; style-src 'self' 'unsafe-inline' file:; img-src 'self' data: file:; font-src 'self' file:; media-src 'self' file:; connect-src 'self' file:; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="no-referrer">
   <title>Page not found - Shravan S C S</title>
   <meta name="description" content="This page does not exist.">
   <meta name="robots" content="noindex">
@@ -13,30 +15,54 @@
   <link rel="apple-touch-icon" href="./assets/images/apple-touch-icon.png">
   <link rel="preload" href="./assets/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="./assets/fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./assets/css/style.css?v=2">
+  <link rel="preload" href="./assets/fonts/bodoni-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/fonts/archivo-black-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./assets/css/style.css?v=14">
+
   <script>
     (function () {
       document.documentElement.classList.add('js');
+
+      // No cookies. Preferences are kept in localStorage only.
+      var skins = ['paper', 'noir', 'gallery', 'signal'];
+      var skin = null;
+
+      try {
+        skin = localStorage.getItem('display-skin');
+        localStorage.removeItem('skin');
+        localStorage.removeItem('season');
+        localStorage.removeItem('effects');
+      } catch (e) { /* storage can be blocked */ }
+
+      if (skins.indexOf(skin) === -1) skin = 'paper';
+
+      document.documentElement.setAttribute('data-skin', skin);
+
       try {
         var stored = localStorage.getItem('theme');
         if (stored === 'light' || stored === 'dark') {
           document.documentElement.setAttribute('data-theme', stored);
         }
+        var lang = localStorage.getItem('lang');
+        if (lang === 'de') document.documentElement.lang = 'de';
       } catch (e) { /* storage can be blocked */ }
+
+      window.setTimeout(function () {
+        if (!window.__shravanReady) {
+          document.documentElement.classList.remove('js');
+        }
+      }, 2500);
     })();
   </script>
 </head>
 
-<body>
+<body data-page="404">
   <header class="site-header is-scrolled">
     <div class="shell header-inner">
       <a class="wordmark" href="./" aria-label="Shravan S C S, Berlin, back to home">
         Shravan S C S
         <span class="wordmark-loc">Berlin</span>
       </a>
-      <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark theme">
-        <span aria-hidden="true">◐</span>
-      </button>
     </div>
   </header>
 
@@ -45,9 +71,9 @@
       <div class="shell">
         <p class="error-code" aria-hidden="true">404</p>
         <div class="error-copy">
-          <h1 id="error-title">This page does not exist.</h1>
-          <p>The address may be wrong, or the page may have moved.</p>
-          <a class="btn" href="./">Back to the homepage</a>
+          <h1 id="error-title" data-i18n="error.title">This page does not exist.</h1>
+          <p data-i18n="error.text">The address may be wrong, or the page may have moved.</p>
+          <a class="btn" href="./" data-i18n="error.back">Back to the homepage</a>
         </div>
       </div>
     </section>
@@ -56,11 +82,13 @@
   <footer class="site-footer">
     <div class="shell footer-inner">
       <p>&copy; <span data-year>2026</span> Shravan S C S</p>
-      <p>Berlin, Germany</p>
+      <p data-i18n="footer.location">Berlin, Germany</p>
+      <p data-i18n="footer.note">No cookies, no trackers</p>
     </div>
   </footer>
 
-  <script src="./assets/js/script.js?v=1"></script>
+  <script src="./assets/js/site-data.js?v=15"></script>
+  <script src="./assets/js/script.js?v=15"></script>
 </body>
 
 </html>

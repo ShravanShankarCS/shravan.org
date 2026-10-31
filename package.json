@@ -1,0 +1,14 @@
+{
+  "name": "shravan.org",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Personal site of Shravan S C S",
+  "scripts": {
+    "build:works": "node scripts/build-works.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

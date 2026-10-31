@@ -1,0 +1,65 @@
+{
+  "generated": "2026-10-31T13:21:41.454Z",
+  "artworks": [
+    {
+      "id": "alecguinessobiwankenobi",
+      "title": "Alec Guinness as Obi-Wan Kenobi",
+      "medium": "Ink on paper",
+      "year": null,
+      "src": "works/thumbs/alecguinessobiwankenobi-900.webp",
+      "full": "works/full/alecguinessobiwankenobi-1600.webp",
+      "original": "works/Artworks/alecguinessobiwankenobi.jpg",
+      "width": 900,
+      "height": 803,
+      "order": 999
+    },
+    {
+      "id": "karstheultimatebeingjjba",
+      "title": "Karl, the Ultimate Being",
+      "medium": "Ink on paper",
+      "year": null,
+      "src": "works/thumbs/karstheultimatebeingjjba-900.webp",
+      "full": "works/full/karstheultimatebeingjjba-1600.webp",
+      "original": "works/Artworks/karstheultimatebeingjjba.jpg",
+      "width": 900,
+      "height": 1257,
+      "order": 999
+    },
+    {
+      "id": "lukeskywalker",
+      "title": "Luke Skywalker",
+      "medium": "Ink on paper",
+      "year": null,
+      "src": "works/thumbs/lukeskywalker-900.webp",
+      "full": "works/full/lukeskywalker-1600.webp",
+      "original": "works/Artworks/lukeskywalker.jpg",
+      "width": 900,
+      "height": 1202,
+      "order": 999
+    },
+    {
+      "id": "palpatine",
+      "title": "Palpatine",
+      "medium": "Ink on paper",
+      "year": null,
+      "src": "works/thumbs/palpatine-900.webp",
+      "full": "works/full/palpatine-1600.webp",
+      "original": "works/Artworks/palpatine.jpg",
+      "width": 900,
+      "height": 1202,
+      "order": 999
+    },
+    {
+      "id": "squidgameseonggihun",
+      "title": "Seong Gi-hun, Squid Game",
+      "medium": "Ink on paper",
+      "year": null,
+      "src": "works/thumbs/squidgameseonggihun-900.webp",
+      "full": "works/full/squidgameseonggihun-1600.webp",
+      "original": "works/Artworks/squidgameseonggihun.jpg",
+      "width": 900,
+      "height": 1202,
+      "order": 999
+    }
+  ]
+}
